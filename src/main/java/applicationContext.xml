@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="resultStrategyComplete" class="com.southwest.training.app.StrategyResult">
+		<property name="responseType" value="SUCCESSFUL" />
+		<property name="responseDescription" value="" />
+	</bean>
+
+	<bean id="completeStrategy" class="com.southwest.training.app.CompleteStrategy">
+		<constructor-arg ref="resultStrategyComplete" />
+	</bean>
+
+	<bean id="resultBunisessStrategy" class="com.southwest.training.app.StrategyResult">
+		<property name="responseType" value="BUSINESS_ERROR" />
+	</bean>
+
+	<bean id="resultServerErrorStrategy" class="com.southwest.training.app.StrategyResult">
+		<property name="responseType" value="SERVER_ERROR" />
+		<property name="responseDescription" value="SERVER_ERROR" />
+	</bean>
+
+	<bean id="badRequestStrategy" class="com.southwest.training.app.BadRequestStrategy">
+		<constructor-arg ref="resultServerErrorStrategy" />
+	</bean>
+
+	<bean id="bunisessExceptionStrategy" class="com.southwest.training.app.BunisessExceptionStrategy">
+		<constructor-arg ref="resultBunisessStrategy" />
+	</bean>
+	
+	<bean id="resultStrategyUnknow" class="com.southwest.training.app.StrategyResult">
+		<property name="responseType" value="UNKNOWN" />
+		<property name="responseDescription" value="Error unknown in the server " />
+	</bean>
+
+	<bean id="unknowExceptionStrategy" class="com.southwest.training.app.UnKnowRequestStrategy">
+		<constructor-arg ref="resultStrategyUnknow" />
+	</bean>
+
+
+
+
+
+
+
+</beans>
